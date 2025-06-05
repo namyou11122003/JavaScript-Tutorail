@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Weather App</title>
+    <style>
+      .weather-container {
+        width: 300px;
+        margin: 50px auto;
+        text-align: center;
+      }
+      input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+      #weatherResult {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="weather-container">
+      <input type="text" id="cityInput" placeholder="Enter city name" />
+      <button onclick="getWeather()">Get Weather</button>
+      <div id="weatherResult"></div>
+    </div>
+
+    <script>
+      const apiKey = "YOUR_API_KEY"; // Replace with your OpenWeatherMap API key
+      const apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=";
+
+      async function getWeather() {
+        let city = document.getElementById("cityInput").value.trim();
+        if (city === "") return;
+
+        try {
+          let response = await fetch(
+            `${apiUrl}${city}&appid=${apiKey}&units=metric`
+          );
+          if (!response.ok) throw new Error("City not found");
+          let data = await response.json();
+          document.getElementById("weatherResult").innerHTML = `
+          <h3>${data.name}</h3>
+          <p>Temperature: ${data.main.temp}°C</p>
+          <p>Weather: ${data.weather[0].description}</p>
+          <p>Humidity: ${data.main.humidity}%</p>
+        `;
+        } catch (error) {
+          document.getElementById("weatherResult").innerText =
+            "Error: City not found";
+        }
+      }
+    </script>
+  </body>
+</html>

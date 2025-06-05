@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Note-Taking App</title>
+    <style>
+      .note-container {
+        width: 600px;
+        margin: 50px auto;
+        display: flex;
+        gap: 20px;
+      }
+      textarea,
+      .preview {
+        width: 50%;
+        height: 300px;
+        padding: 10px;
+        border: 1px solid #ccc;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  </head>
+  <body>
+    <div class="note-container">
+      <textarea id="noteInput" placeholder="Write Markdown here..."></textarea>
+      <div class="preview" id="notePreview"></div>
+    </div>
+    <button onclick="saveNote()">Save Note</button>
+    <div id="savedNotes"></div>
+
+    <script>
+      const noteInput = document.getElementById("noteInput");
+      const notePreview = document.getElementById("notePreview");
+      let notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+      noteInput.addEventListener("input", () => {
+        notePreview.innerHTML = marked.parse(noteInput.value);
+      });
+
+      function saveNote() {
+        const note = noteInput.value;
+        if (note.trim()) {
+          notes.push(note);
+          localStorage.setItem("notes", JSON.stringify(notes));
+          renderNotes();
+          noteInput.value = "";
+          notePreview.innerHTML = "";
+        }
+      }
+
+      function renderNotes() {
+        const savedNotes = document.getElementById("savedNotes");
+        savedNotes.innerHTML = "";
+        notes.forEach((note, index) => {
+          const div = document.createElement("div");
+          div.innerHTML = marked.parse(note);
+          div.style.border = "1px solid #ccc";
+          div.style.padding = "10px";
+          div.style.margin = "10px 0";
+          const deleteBtn = document.createElement("button");
+          deleteBtn.innerText = "Delete";
+          deleteBtn.onclick = () => {
+            notes.splice(index, 1);
+            localStorage.setItem("notes", JSON.stringify(notes));
+            renderNotes();
+          };
+          div.appendChild(deleteBtn);
+          savedNotes.appendChild(div);
+        });
+      }
+
+      renderNotes();
+    </script>
+  </body>
+</html>

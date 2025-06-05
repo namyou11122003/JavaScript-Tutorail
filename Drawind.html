@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Drawing App</title>
+    <style>
+      .draw-container {
+        width: 600px;
+        margin: 50px auto;
+        text-align: center;
+      }
+      canvas {
+        border: 1px solid #ccc;
+      }
+      .controls {
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="draw-container">
+      <canvas id="canvas" width="500" height="300"></canvas>
+      <div class="controls">
+        <input type="color" id="color" value="#000000" />
+        <input type="range" id="brushSize" min="1" max="20" value="5" />
+        <button onclick="clearCanvas()">Clear</button>
+      </div>
+    </div>
+
+    <script>
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+      let drawing = false;
+
+      canvas.addEventListener("mousedown", () => (drawing = true));
+      canvas.addEventListener("mouseup", () => (drawing = false));
+      canvas.addEventListener("mousemove", draw);
+
+      function draw(e) {
+        if (!drawing) return;
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        ctx.beginPath();
+        ctx.arc(
+          x,
+          y,
+          document.getElementById("brushSize").value / 2,
+          0,
+          Math.PI * 2
+        );
+        ctx.fillStyle = document.getElementById("color").value;
+        ctx.fill();
+      }
+
+      function clearCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Expense Tracker</title>
+    <style>
+      .tracker-container {
+        width: 400px;
+        margin: 50px auto;
+      }
+      input,
+      select {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+      li {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+      }
+      .income {
+        color: green;
+      }
+      .expense {
+        color: red;
+      }
+      #balance {
+        font-weight: bold;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="tracker-container">
+      <h2>Expense Tracker</h2>
+      <form id="transactionForm">
+        <input
+          type="text"
+          id="description"
+          placeholder="Description"
+          required
+        />
+        <input type="number" id="amount" placeholder="Amount" required />
+        <select id="type">
+          <option value="income">Income</option>
+          <option value="expense">Expense</option>
+        </select>
+        <button type="submit">Add Transaction</button>
+      </form>
+      <div id="balance">Balance: $0.00</div>
+      <ul id="transactionList"></ul>
+    </div>
+
+    <script>
+      let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+
+      function updateBalance() {
+        const balance = transactions.reduce(
+          (acc, t) => (t.type === "income" ? acc + t.amount : acc - t.amount),
+          0
+        );
+        document.getElementById(
+          "balance"
+        ).innerText = `Balance: $${balance.toFixed(2)}`;
+      }
+
+      function renderTransactions() {
+        const list = document.getElementById("transactionList");
+        list.innerHTML = "";
+        transactions.forEach((t, index) => {
+          const li = document.createElement("li");
+          li.className = t.type;
+          li.innerHTML = `${t.description}: $${t.amount.toFixed(
+            2
+          )} <button onclick="deleteTransaction(${index})">Delete</button>`;
+          list.appendChild(li);
+        });
+        updateBalance();
+        localStorage.setItem("transactions", JSON.stringify(transactions));
+      }
+
+      function deleteTransaction(index) {
+        transactions.splice(index, 1);
+        renderTransactions();
+      }
+
+      document
+        .getElementById("transactionForm")
+        .addEventListener("submit", (e) => {
+          e.preventDefault();
+          const description = document.getElementById("description").value;
+          const amount = parseFloat(document.getElementById("amount").value);
+          const type = document.getElementById("type").value;
+          transactions.push({ description, amount, type });
+          renderTransactions();
+          e.target.reset();
+        });
+
+      renderTransactions();
+    </script>
+  </body>
+</html>

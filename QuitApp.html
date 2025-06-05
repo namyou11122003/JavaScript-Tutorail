@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Quiz App</title>
+    <style>
+      .quiz-container {
+        width: 400px;
+        margin: 50px auto;
+        text-align: center;
+      }
+      .option {
+        display: block;
+        margin: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        cursor: pointer;
+      }
+      .option:hover {
+        background-color: #f0f0f0;
+      }
+      #result {
+        margin-top: 20px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="quiz-container">
+      <h2 id="question"></h2>
+      <div id="options"></div>
+      <div id="result"></div>
+      <button onclick="nextQuestion()">Next</button>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          question: "What is 2 + 2?",
+          options: ["3", "4", "5", "6"],
+          answer: "4",
+        },
+        {
+          question: "What is the capital of France?",
+          options: ["Paris", "London", "Berlin", "Madrid"],
+          answer: "Paris",
+        },
+      ];
+
+      let currentQuestion = 0;
+      let score = 0;
+
+      function loadQuestion() {
+        let q = questions[currentQuestion];
+        document.getElementById("question").innerText = q.question;
+        let optionsDiv = document.getElementById("options");
+        optionsDiv.innerHTML = "";
+        q.options.forEach((option) => {
+          let button = document.createElement("button");
+          button.className = "option";
+          button.innerText = option;
+          button.onclick = () => checkAnswer(option);
+          optionsDiv.appendChild(button);
+        });
+        document.getElementById("result").innerText = "";
+      }
+
+      function checkAnswer(selected) {
+        let q = questions[currentQuestion];
+        if (selected === q.answer) {
+          score++;
+          document.getElementById("result").innerText = "Correct!";
+        } else {
+          document.getElementById(
+            "result"
+          ).innerText = `Wrong! The correct answer is ${q.answer}`;
+        }
+      }
+
+      function nextQuestion() {
+        currentQuestion++;
+        if (currentQuestion < questions.length) {
+          loadQuestion();
+        } else {
+          document.getElementById(
+            "question"
+          ).innerText = `Quiz Over! Score: ${score}/${questions.length}`;
+          document.getElementById("options").innerHTML = "";
+          document.getElementById("result").innerHTML = "";
+        }
+      }
+
+      loadQuestion();
+    </script>
+  </body>
+</html>
