@@ -5,25 +5,29 @@
     <title>Document</title>
   </head>
   <body>
-    <div
-      id="hoverBox"
-      style="
-        width: 200px;
-        height: 100px;
-        background: lightgray;
-        text-align: center;
-        line-height: 100px;
-      "
-    >
-      Hover over me
-    </div>
-    <p id="hoverText"></p>
+<input type="text" id="keyInput" placeholder="Type something..." />
+<p id="keyOutput"></p>
 
-    <script>
-      document.getElementById("hoverBox").addEventListener("mouseover", () => {
-        document.getElementById("hoverText").textContent =
-          "Mouse is over the box!";
-      });
-    </script>
+<script>
+  const input = document.getElementById("keyInput");
+  const output = document.getElementById("keyOutput");
+
+  input.addEventListener("keydown", (e) => {
+    output.textContent = `Key Down: ${e.key}`;
+  });
+
+  input.addEventListener("keyup", (e) => {
+    output.textContent = `Key Up: ${e.key}`;
+  });
+
+  // You can also check key codes or combinations
+  input.addEventListener("keydown", (e) => {
+    if (e.ctrlKey && e.key === "s") {
+      e.preventDefault();
+      output.textContent = "Ctrl + S was pressed (Save shortcut)";
+    }
+  });
+</script>
+
   </body>
 </html>

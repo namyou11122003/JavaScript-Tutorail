@@ -72,22 +72,29 @@ Absolutely! Below are **detailed examples** for each of the event types you ment
 
 ---
 
-## ✅ 5. `mouseover` – Mouse hovers over an element
-
-```html
-<div
-  id="hoverBox"
-  style="width:200px;height:100px;background:lightgray;text-align:center;line-height:100px;"
->
-  Hover over me
+## ✅ 5. `mouse` – Mouse hovers over an element
+   <div id="mouseBox" style="width:300px;height:150px;background:#eee;text-align:center;line-height:150px;">
+  Hover or Click Me
 </div>
-<p id="hoverText"></p>
+<p id="mouseOutput"></p>
 
 <script>
-  document.getElementById("hoverBox").addEventListener("mouseover", () => {
-    document.getElementById("hoverText").textContent = "Mouse is over the box!";
+  const box = document.getElementById("mouseBox");
+  const output = document.getElementById("mouseOutput");
+
+  box.addEventListener("click", () => output.textContent = "Mouse Clicked!");
+  box.addEventListener("dblclick", () => output.textContent = "Mouse Double Clicked!");
+  box.addEventListener("mouseover", () => output.textContent = "Mouse Over the box!");
+  box.addEventListener("mouseout", () => output.textContent = "Mouse Left the box!");
+  box.addEventListener("mousedown", () => output.textContent = "Mouse Button Down!");
+  box.addEventListener("mouseup", () => output.textContent = "Mouse Button Released!");
+  box.addEventListener("mousemove", () => output.textContent = "Mouse Moving...");
+  box.addEventListener("contextmenu", (e) => {
+    e.preventDefault(); // disable right-click menu
+    output.textContent = "Right Click!";
   });
 </script>
+
 ```
 
 ---
