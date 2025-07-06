@@ -2,10 +2,61 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>todolist</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      li {
+        list-style-type: none;
+      }
+      .container {
+        width: 400px;
+        margin: 100px auto;
+      }
+      input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+      li {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+      }
+    </style>
   </head>
 
   <body>
-    <script src="main.js"></script>
+    <div class="container">
+      <input type="text" class="task" placeholder="Add a new Task" />
+      <button class="btnAddTask">Add Task</button>
+    </div>
+
+    <script>
+      const btnAddTask = document.querySelector(".btnAddTask");
+      const taskList = document.querySelector(".taskList");
+      btnAddTask.addEventListener("click", () => {
+        const taskInput = document.querySelector(".task");
+        const TaskText = taskInput.value.trim();
+        if (TaskText == "") return;
+
+        const li = document.createElement("li");
+
+        li.innerHTML = `
+            <span>${TaskText}</span>
+           <button onclick="deleteTask(this)">Delete</button>
+       `;
+        taskList.appendChild(li);
+
+        taskInput.value = "";
+      });
+      function deleteTask(btnDel) {
+        btnDel.parentElement.remove();
+      }
+    </script>
   </body>
 </html>
