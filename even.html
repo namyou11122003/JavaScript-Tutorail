@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<!--change-->
+<!--<select class="selection">-->
+<!--  <option>Choose</option>-->
+<!--  <option value="Red">Red</option>-->
+<!--  <option value="Green">Green</option>-->
+<!--  <option value="Yellow">Yellow</option>-->
+<!--</select>-->
+<!--<h5 class="headingOne"></h5>-->
+<!--event key-->
+<!--<input type="text" placeholder="Type something" class="input">-->
+<!--<p class="pa"></p>-->
+
+
+<!--<form>-->
+<!--  <input type="text" name="" id="inputform" >-->
+<!--  <button type="submit" class="submti">Submit</button>-->
+<!--</form>-->
+<!--<h1 id="heading"></h1>-->
+
+<!--event mouse-->
+
+<div style="width: 200px; height: 200px ; background-color: green; margin: 100px " >
+  hover me
+</div>
+<p class="mouseOutput"></p>
+<div style="width: 200px; height: 200px ; background-color: green; " >
+click me
+</div>
+<h1 class="heading1">heading one </h1>
+<!--<script src="main.js"></script>-->
+<script>
+  const div = document.querySelector('div');
+  const mouseOuput = document.querySelector('.mouseOutput');
+// <!--  div.addEventListener('mouseover',()=>mouseOuput.innerText = "MouseOver")-->
+// <!--  div.addEventListener('mouseup',()=>mouseOuput.innerText = "mouseup")-->
+// <!--  div.addEventListener('mousemove',()=>mouseOuput.innerText = "mousemove")-->
+// <!--  div.addEventListener('mousedown',()=>mouseOuput.innerText = "mousedown")-->
+
+  div.addEventListener('mouseleave',()=>mouseOuput.innerText = "mouseLeave")
+  </script>
+
+<!--&lt;!&ndash;  &ndash;&gt;-->
+<!--//  const headingOne = document.querySelector(".headingOne")-->
+<!--//  const select = document.querySelector(".selection")-->
+<!--//  // event change-->
+<!--//  select.addEventListener("change",(e)=>{-->
+<!--//    headingOne.innerHTML =e.target.value;-->
+<!--//  })-->
+<!--////event   keyboard-->
+<!--// const keyup = document.querySelector('.input')-->
+<!--//  keyup.addEventListener('keyup',()=>{-->
+<!--//    console.log(keyup.value)-->
+<!--// })-->
+<!--//  // key down-->
+<!--//  keyup.addEventListener('keydown',()=>{-->
+<!--//    console.log(keyup.value)-->
+<!--// })-->
+<!--//-->
+<!--////event submit-->
+<!--//  const heading = document.querySelector('#heading')-->
+<!--//  const form = document.querySelector('form');-->
+<!--//  const inputFrom = document.getElementById('inputform')-->
+<!--//  form.addEventListener('submit' ,(e)=>{-->
+<!--//    e.preventDefault();-->
+<!--//    console.log('submited....' , inputFrom.value)-->
+<!--//    // console.log(inputFrom-->
+<!--//    // )-->
+<!--//    // heading.innerHTML = inputFrom;-->
+<!--//  //-->
+<!--//  })-->
+
+<!--//   event mouse-->
+
+
+
+<!--</script>-->
+
+</body>
+</html>

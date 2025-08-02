@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phone Shop</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+   <!-- div class="container"> -->
+    <header>
+        <div class="header-content">
+            <div class="logo">Phone Shop</div>
+            <button class="cart-button" onclick="toggleCart()">
+                🛒 Cart
+                <span class="cart-count" id="cartCount">0</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="controls">
+        <div class="search-container">
+            <input type="text" class="search-input" id="searchInput" placeholder="🔍 Search products..." oninput="filterProducts()">
+        </div>
+        <div class="category-filters">
+            <button class="filter-btn active" data-category="all" onclick="filterByCategory(this, 'all')">All</button>
+            <button class="filter-btn" data-category="phones" onclick="filterByCategory(this, 'phones')">Phones</button>
+            <button class="filter-btn" data-category="cases" onclick="filterByCategory(this, 'cases')">Cases</button>
+            <button class="filter-btn" data-category="chargers" onclick="filterByCategory(this, 'chargers')">Chargers</button>
+            <button class="filter-btn" data-category="headphones" onclick="filterByCategory(this, 'headphones')">Headphones</button>
+            <button class="filter-btn" data-category="accessories" onclick="filterByCategory(this, 'accessories')">Accessories</button>
+        </div>
+    </div>
+
+    <div class="products-grid" id="productsGrid"></div>
+</div>
+
+<!-- Cart Modal -->
+<div class="cart-modal" id="cartModal" onclick="closeCartOnBackdrop(event)">
+    <div class="cart-content">
+        <div class="cart-header">
+            <h2 class="cart-title">Shopping Cart</h2>
+            <button class="close-cart" onclick="toggleCart()">×</button>
+        </div>
+        <div id="cartItems"></div>
+        <div class="cart-total" id="cartTotal">Total: $0.00</div>
+    </div>
+</div>
+
+    <script src="main.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Es6</title>
+  </head>
+  <body>
+    <script>
+      //   const greeting = () => console.log("how are you ?");
+      //   const name = "sum";
+      //   console.log(`hello ${name}`);
+      const greeting = (name = "Guest") => {
+        console.log(`hello ${name}`);
+      };
+      // default
+      greeting();
+      greeting("sok");
+
+      //   const obj = {
+      //     name: "Tom",
+      //     age: 23,
+      //   };
+      //   const { name, age } = obj;
+      //   console.log(name, age);
+
+      //   const friend = ["sok", "som", "mean"];
+      //   const oldFriend = ["ya", "seth", ...friend];
+      //   //   const allFriend = friend + oldFriend;
+      //   console.log(oldFriend);
+      const obj = {
+        name: "Tom",
+        age: 23,
+      };
+      const newObj = { ...obj, name: "som", age: "30" };
+      console.log(({ name, age } = newObj));
+      //   const newObj = { ...obj, name: "Jerry" };
+      //   console.log(({ name, age } = newObj));
+
+      const arr1 = [1, 22, 33, 44, 55, 66, 1, 22, 33, 44, 55, 1, 1, 1];
+      console.log(arr1);
+      const newArr = new Set(arr1);
+      //
+      console.log(newArr);
+
+      const cto = setTimeout(() => console.log("How to use setTimeOut "), 2000);
+      clearTimeout(cto);
+
+      const inter = setInterval(() => {
+        console.log("Running");
+      }, 1000);
+      setTimeout(() => {
+        clearInterval(inter);
+        console.log("stop");
+      }, 5000);
+    </script>
+  </body>
+</html>

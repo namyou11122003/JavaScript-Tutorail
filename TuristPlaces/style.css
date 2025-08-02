@@ -1,0 +1,180 @@
+:root {
+  font-size: 62.5%;
+  --primary-color: #3fa958;
+  --secondary-color: #6b9161;
+  --accent-color: #d8d4ce;
+  --text-color: #ffffff;
+
+  --round-radius: 100px;
+  --lg-radius: 25px;
+  --md-radius: 15px;
+  --sm-radius: 10px;
+
+  --text-normal: 1.8rem;
+  --text-lg: 5rem;
+  --text-mdlg: 3.5rem;
+  --text-md: 2.3rem;
+  --text-sm: 1.5rem;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Concert One", sans-serif;
+  color: var(--text-color);
+  line-height: 1.2;
+  background: var(--primary-color);
+  height: 100vh;
+}
+.header {
+  padding: 5rem 0 1.5rem 0;
+}
+
+.main-heading {
+  color: white;
+  font-size: var(--text-lg);
+  text-align: center;
+  letter-spacing: 5px;
+}
+
+.input {
+  font-family: "Concert One", sans-serif;
+  display: block;
+  width: 90%;
+  margin: 3rem auto 1rem auto;
+  font-size: var(--text-md);
+  color: var(--text-color);
+  border-radius: var(--round-radius);
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  padding: 1.7rem 3rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.03);
+  transition: all 0.2s ease;
+}
+
+@media screen and (min-width: 768px) {
+  .input {
+    width: 70%;
+  }
+}
+
+.btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 2rem;
+}
+/* Make sure the flex item (button) shows from beginning not centre */
+@media screen and (max-width: 900px) {
+  .btn-container {
+    justify-content: flex-start;
+  }
+}
+/* Hide Scroll bar */
+.btn-container::-webkit-scrollbar {
+  display: none;
+}
+.btn-container > button {
+  flex: 0 0 auto;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 1rem 2rem;
+  border-radius: var(--round-radius);
+  color: var(--secondary-color);
+  cursor: pointer;
+}
+.btn-container > button:focus {
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 15px 0px rgb(235, 235, 235);
+}
+
+/* card container */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem;
+  height: 500px;
+  overflow: scroll;
+}
+.container::-webkit-scrollbar {
+  display: none;
+}
+.container > .txt {
+  font-size: var(--text-mdlg);
+  letter-spacing: 2px;
+}
+
+.card {
+  flex-grow: 1;
+  flex-basis: 300px;
+  max-width: 500px;
+  height: 220px;
+  position: relative;
+  border-radius: var(--lg-radius);
+  overflow: hidden;
+  border: 5px solid rgba(255, 255, 255, 0.2);
+}
+.card > .img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  overflow: hidden;
+  transform: scale(1.05);
+  filter: contrast(1);
+  transition: all 0.2s ease-out;
+}
+.card:hover > .img {
+  filter: contrast(0.4) blur(10px);
+  transform: scale(1.1);
+  --effects: 1.1;
+}
+
+.card > .heading,
+.details {
+  color: white;
+  width: 90%;
+  text-align: center;
+  position: absolute;
+  z-index: 100;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.card > .heading {
+  text-shadow: 5px 5px 50px rgb(0, 0, 0);
+  letter-spacing: 5px;
+  font-size: var(--text-mdlg);
+  top: 50%;
+  opacity: 0.9;
+  transition: all 0.25s ease-out;
+}
+.card:hover > .heading {
+  top: -50%;
+  opacity: 0;
+}
+
+.card > .details {
+  font-size: var(--text-sm);
+  opacity: 0.8;
+  top: 100%;
+  opacity: 0;
+  filter: blur(20px);
+  transition: all 0.2s ease-in;
+}
+.card:hover > .details {
+  top: 50%;
+  opacity: 1;
+  filter: blur(0);
+}
